@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        img {
+            height: 100vh;
+            display: block;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 如果有占位图，可以将图片的src都设为占位图的路径 -->
+    <img data-src="/image/图片.jpg" alt="懒加载1" />
+    <img data-src="/image/图片.jpg" alt="懒加载2" />
+    <img data-src="/image/图片.jpg" alt="懒加载3" />
+    <img data-src="/image/图片.jpg" alt="懒加载4" />
+    <img data-src="/image/图片.jpg" alt="懒加载5" />
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const imgs = document.querySelectorAll("img");
+        const imageObserve = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    imageObserve.unobserve(img);
+                }
+            });
+        });
+        Array.from(imgs).forEach((img) => {
+            // 将所有的图片加入监听
+            imageObserve.observe(img);
+        });
+    });
+
+</script>
+
+</html>
