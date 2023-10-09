@@ -1,0 +1,2 @@
+全局修改 :git config --global core.ignorecase false;
+本项目下修改：git config core.ignorecase false
