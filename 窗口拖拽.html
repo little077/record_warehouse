@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #draggable {
+      width: 200px;
+      height: 200px;
+      background-color: #f1f1f1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <div id="draggable">
+  </div>
+
+  <script>
+    const draggable = document.getElementById('draggable');
+
+    let offsetX, offsetY;
+    let isDragging = false;
+
+    draggable.addEventListener('mousedown', startDrag);
+    draggable.addEventListener('mousemove', drag);
+    draggable.addEventListener('mouseup', stopDrag);
+    draggable.addEventListener('mouseleave', stopDrag);
+
+    function startDrag(e) {
+      isDragging = true;
+      offsetX = e.clientX - draggable.offsetLeft;
+      offsetY = e.clientY - draggable.offsetTop;
+    }
+
+    function drag(e) {
+      if (isDragging) {
+        const newX = e.clientX - offsetX;
+        const newY = e.clientY - offsetY;
+
+        const maxX = window.innerWidth - draggable.offsetWidth;
+        const maxY = window.innerHeight - draggable.offsetHeight;
+
+        const clampedX = Math.max(0, Math.min(newX, maxX));
+        const clampedY = Math.max(0, Math.min(newY, maxY));
+
+        draggable.style.left = clampedX + 'px';
+        draggable.style.top = clampedY + 'px';
+      }
+    }
+
+    function stopDrag() {
+      isDragging = false;
+    }
+  </script>
+</body>
+</html>
