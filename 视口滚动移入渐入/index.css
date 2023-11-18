@@ -1,0 +1,26 @@
+.m_home_card{
+    width: 200px;
+    height: 200px;
+}
+.box{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.imgani{
+    animation: tran 1s ease;
+    
+}
+@keyframes tran{
+    from{
+        transform: translateY(400px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
