@@ -1,0 +1,35 @@
+$curTheme: "light";
+
+$themes: (
+  light: (
+    background-color: #64ff00,
+    color: "red"
+  ),
+  dark: (
+    background-color: #000000,
+    color: "blue"
+  ),
+);
+
+@mixin useTheme() {
+  @each $key, $value in $themes {
+    $curTheme: $key !global;
+    html[data-theme="#{$key}"] & {
+      @content;
+    }
+  }
+}
+
+@function getVar($paramName) {
+  $themeMap: map-get($themes, $curTheme);
+  @return map-get($themeMap, $paramName);
+}
+
+.item {
+  width: 100%;
+  height: 100%;
+  @include useTheme {
+    background-color: getVar("background-color");
+    color: getVar("color");
+  }
+}
