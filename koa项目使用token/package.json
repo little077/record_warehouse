@@ -1,0 +1,21 @@
+{
+  "name": "koausetoken",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.15.0",
+    "koa-router": "^12.0.1"
+  }
+}
