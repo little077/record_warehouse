@@ -1,14 +1,16 @@
-//next里动态路由实现ISR
-
-export async function getStaticProps({ params }:{params:any}) {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${params.id}`).then(res=>res.json())
-    return { props: { post:res } }
+//https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration
+//每隔10秒生成静态资源
+export async function getStaticProps() {
+  const res = await fetch('https://.../posts')
+  const posts = await res.json()
+ 
+  return {
+    props: {
+      posts,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10, // In seconds
   }
-export async function getStaticPaths() {
-    // 调用外部 API 获取博文列表
-    const res = await fetch('https://jsonplaceholder.typicode.com/todos/').then(res=>res.json())
-    const paths = res?.map((post:any) => ({
-      params: { id: String(post.id) },
-    }))
-    return { paths, fallback: false }
 }
